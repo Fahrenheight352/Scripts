@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#This script is work for auto update and making new directoties
+#Try to ping hosts
+
+echo "Do you wish to update system?"
+read system
+
+if [ "$system" = "Yes" ]
+then
+   echo "Starting updating system"
+   sudo apt update
+   sudo apt upgrade -y
+else
+   echo "Stop working"
+fi
+
+echo "Do you wich to make new directories?"
+read directory
+
+if [ "$directory" = "Yes" ]
+then
+   echo "Enter directory name"
+   read dir
+   echo "Start making directories"
+   mkdir /home/ivan/"$dir"
+else
+   echo "Stop working"
+fi
+
+echo "If you whant to ping hosts enter ip adress?"
+read ipadres
+ping -c 10 $ipadres > /home/ivan/result.txt
+if [ $? -eq 0 ]
+then
+    echo "Host $ipadres available"
+else
+    echo "Host $ipadres not available.Stop working"
+fi
