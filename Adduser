@@ -1,0 +1,48 @@
+#!/bin/bash
+#Данный скрипт после установки ОС позволяет добавлять новых пользователей
+#устанавливать дополнительное програмное обеспечение
+
+printf "Выберите значение из меню"
+printf "\n1.Создание нового пользователя \n2.Установка дополнительных программ >
+read user_choise
+while true
+do
+   case $user_choise in
+    1)echo "Введите имя пользователя"
+      read user_name
+      sudo useradd $user_name -m -d /home/$user_name
+      break;;
+    2)echo "Установка программ"
+      printf "Выберите значение из меню"
+      printf "\n1.Vivaldi\n2.Telegram\n3.Docker\n4.pipx\n5.Ansible"
+      read user_choise2
+        if [[ "$user_choise2" -eq 1 ]]
+        then
+ echo "Произвожу установку приложения Vivaldi"
+           sudo apt-get -y install ./vivaldi*.deb
+        elif [[ "$user_choise2" -eq 2 ]]
+        then
+           echo "Произвожу установку приложения Telegram"
+           sudo apt install telegram-desktop -y
+        elif [[ "$user_choise2" -eq 3 ]]
+        then
+           echo "Произвожу установку приложения Docker"
+           curl -fsSL https://get.docker.com -o get-docker.sh
+           chmod +x get-docker.sh
+           ./get-docker.sh
+        elif [[ "$user_choise2" -eq 4 ]]
+        then
+           echo "Произвожу установку приложения pipx"
+           sudo apt install pipx
+        elif [[ "$user_choise2" -eq 5 ]]
+        then
+           echo "Произвожу установку Ansible"
+           sudo pipx install --include-deps ansible
+        fi
+      break;;
+    3)echo "Удаление приложение snap"
+      sudo purge snapd
+      break;;
+    *)echo "Выберите правильный пункт меню";;
+   esac
+done
