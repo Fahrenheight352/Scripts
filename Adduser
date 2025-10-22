@@ -18,7 +18,7 @@ do
       read user_choise2
         if [[ "$user_choise2" -eq 1 ]]
         then
- echo "Произвожу установку приложения Vivaldi"
+           echo "Произвожу установку приложения Vivaldi"
            sudo apt-get -y install ./vivaldi*.deb
         elif [[ "$user_choise2" -eq 2 ]]
         then
