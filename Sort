@@ -1,0 +1,46 @@
+#!/bin/bash
+# This script can sort process, logs, check ip
+
+printf "Выберите пункт из меню:\n"
+printf "1.Осуществить возможность доступа сети и запись результатов в отдельный файл.\n2.Осуществить поиск запущенных процессов.\n3.Осуществить сортировку логов приложения по запросу пользовате>
+
+echo "Выберите вариант ответа нажатием цифры. Ваш ответ?"
+read user_answer
+ping_route () {
+        echo "Введите ip адрес для проверки доступа"
+        read ip_choise
+        echo "Введите название файла"
+        read file_name
+        ping -n 10 "$ip_choise"  > "$file_name"
+}
+
+process_check () {
+        echo "Введите название процесса"
+        read process_choise
+        echo "Хотите ли Вы создать файл с результатами?"
+        read user_choise
+           case  "$user_choise" in
+           yes | YES) echo "Введите название файла"
+                       read file_name
+                       echo "Произвожу поиск процесса и запись результата в ранее указаный файл"
+                       top | grep "$process_choise" > "$file_name";;
+           no | No )  echo "Произвожу поиск процесса и вывод на экран"
+                       top | grep "$process_choise";;
+                   *) echo "Процесс не найден.";;
+           esac
+}
+
+log_check () {
+        echo "Введите название программы для просмотра и вывода ее логов"
+        read log_choise
+        echo "Введите название файла для записи результатов поиска"
+        read file_name
+        cat /var/log/dpkg.log | grep "$log_choise" > "$file_name"
+}
+
+case $user_answer in
+    1)ping_route;;
+    2)process_check;;
+    3)log_check;;
+    *)echo "Выбор неверный";;
+esac
