@@ -1,3 +1,4 @@
+# For use with Ansible playbook
 #!/bin/bash
 
 sudo mkdir -p /etc/apt/keyrings
