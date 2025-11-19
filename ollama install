@@ -1,0 +1,9 @@
+#intalling Ollama AI
+#!/bin/bash
+apt update && apt upgrade
+apt install curl -y
+apt install pipx
+curl -fsSL https://get.docker.com -o get-docker.sh
+chmod +x get-docker.sh
+./get-docker.sh
+curl -fsSL https://ollama.com/install.sh | sh 
